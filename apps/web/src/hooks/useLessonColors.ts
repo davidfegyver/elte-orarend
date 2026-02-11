@@ -9,6 +9,7 @@ export const LESSON_TYPES = [
     { key: 'vizsgakurzus', label: 'Vizsgakurzus', cssVar: '--lesson-color-vizsgakurzus', className: 'lesson-vizsgakurzus' },
     { key: 'házidolgozat', label: 'Házidolgozat', cssVar: '--lesson-color-hazidolgozat', className: 'lesson-hazidolgozat' },
     { key: 'szakmai gyakorlat', label: 'Szakmai gyakorlat', cssVar: '--lesson-color-szakmai-gyakorlat', className: 'lesson-szakmai-gyakorlat' },
+    { key: 'teremfoglalás', label: 'Teremfoglalás', cssVar: '--lesson-color-teremfoglalas', className: 'lesson-teremfoglalas' },
     { key: 'elfoglaltság', label: 'Elfoglaltság', cssVar: '--lesson-color-elfoglaltsag', className: 'lesson-elfoglaltsag' },
 ] as const;
 
@@ -25,6 +26,7 @@ const DEFAULT_COLORS: LessonColors = {
     'vizsgakurzus': '#9c27b0',
     'házidolgozat': '#0288d1',
     'szakmai gyakorlat': '#00695c',
+    'teremfoglalás': '#795548',
     'elfoglaltság': '#616161',
 };
 
@@ -32,8 +34,11 @@ const STORAGE_KEY = 'LESSON_COLORS';
 
 const LESSON_TYPE_MAP = new Map(LESSON_TYPES.map((t) => [t.key, t]));
 
-export const getLessonTypeClass = (type: LessonTypeKey): string => {
-    return LESSON_TYPE_MAP.get(type)!.className;
+const DEFAULT_LESSON_CLASS = 'lesson-elfoglaltsag';
+
+export const getLessonTypeClass = (type: string): string => {
+    const lessonType = LESSON_TYPE_MAP.get(type as LessonTypeKey);
+    return lessonType?.className ?? DEFAULT_LESSON_CLASS;
 };
 
 export { LESSON_TYPE_MAP };
